@@ -6,8 +6,7 @@ import uuid from "uuid";
 const ExpenseForm = () => {
   const [expenseDetails, setExpenseDetails] = useState({
     charge: "",
-    amount: "",
-    id: uuid.v4()
+    amount: ""
   });
 
   const expenseContext = useContext(ExpenseContext);
@@ -20,7 +19,13 @@ const ExpenseForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
+    expenseDetails.id = uuid.v4();
+    expenseDetails.amount = parseInt(expenseDetails.amount);
     addItem(expenseDetails);
+    setExpenseDetails({
+      charge: "",
+      amount: ""
+    });
   };
 
   return (
