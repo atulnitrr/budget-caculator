@@ -1,9 +1,11 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import ExpenseItem from "./ExpenseItem";
-import PropTypes from "prop-types";
 import { MdDelete } from "react-icons/md";
+import ExpenseContext from "../context/expenseContext";
 
-const ExpenseList = ({ expenses }) => {
+const ExpenseList = () => {
+  const expenseContext = useContext(ExpenseContext);
+  const { expenses } = expenseContext;
   return (
     <Fragment>
       <ul className="list">
@@ -21,7 +23,4 @@ const ExpenseList = ({ expenses }) => {
   );
 };
 
-ExpenseList.propTypes = {
-  expenses: PropTypes.array.isRequired
-};
 export default ExpenseList;
