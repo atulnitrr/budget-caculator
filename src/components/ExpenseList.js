@@ -1,13 +1,23 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ExpenseItem from "./ExpenseItem";
 import PropTypes from "prop-types";
+import { MdDelete } from "react-icons/md";
 
 const ExpenseList = ({ expenses }) => {
   return (
-    <div>
-      <h2>Hello from expense List</h2>
-      <ExpenseItem />
-    </div>
+    <Fragment>
+      <ul className="list">
+        {expenses.map(expense => {
+          return <ExpenseItem key={expense.id} expense={expense} />;
+        })}
+      </ul>
+      {expenses.length > 0 && (
+        <button className="btn">
+          clear expense
+          <MdDelete className="btn-icon" />
+        </button>
+      )}
+    </Fragment>
   );
 };
 
