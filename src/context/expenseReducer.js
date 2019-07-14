@@ -1,4 +1,10 @@
-import { DELETE_ITEM, ADD_ITEM, UPDATE_TOTAL } from "./types";
+import {
+  DELETE_ITEM,
+  ADD_ITEM,
+  UPDATE_TOTAL,
+  SET_CURRENT,
+  UPDATE_ITEM
+} from "./types";
 
 export default (state, action) => {
   switch (action.type) {
@@ -6,9 +12,16 @@ export default (state, action) => {
       return {
         expenses: [...state.expenses, action.payload]
       };
+    case UPDATE_ITEM:
+      return {
+        ...state,
+        expenses: state.expenses.map(exp =>
+          exp.id === action.payload.id ? action.payload : exp
+        )
+      };
     case DELETE_ITEM:
       return {
-        expenses: state.expenses.filter(exp => exp.id != action.payload)
+        expenses: state.expenses.filter(exp => exp.id !== action.payload)
       };
 
     case UPDATE_TOTAL:
@@ -20,6 +33,11 @@ export default (state, action) => {
             : state.expenses.reduce((acc, curr) => {
                 return (acc += curr.amount);
               }, 0)
+      };
+    case SET_CURRENT:
+      return {
+        ...state,
+        currentItem: state.expenses.filter(exp => exp.id === action.payload)
       };
     default:
       return {

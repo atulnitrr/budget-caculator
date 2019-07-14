@@ -2,13 +2,19 @@ import React, { useReducer } from "react";
 
 import ExpenseContext from "./expenseContext";
 import expenseReducer from "./expenseReducer";
-import { ADD_ITEM, DELETE_ITEM, UPDATE_TOTAL } from "./types";
+import {
+  ADD_ITEM,
+  DELETE_ITEM,
+  UPDATE_TOTAL,
+  SET_CURRENT,
+  UPDATE_ITEM
+} from "./types";
 
 const ExpenseState = props => {
   const initialState = {
     expenses: [],
     total: 0,
-    current: null
+    currentItem: null
   };
   const [state, dispatch] = useReducer(expenseReducer, initialState);
 
@@ -20,19 +26,30 @@ const ExpenseState = props => {
     updateTotal();
   };
 
+  const updateExpenses = expenseDetatil => {
+    dispatch({ type: UPDATE_ITEM, payload: expenseDetatil });
+    updateTotal();
+  };
+
   const deleteItem = id => {
     dispatch({ type: DELETE_ITEM, payload: id });
     updateTotal();
+  };
+
+  const setCurrntItem = id => {
+    dispatch({ type: SET_CURRENT, payload: id });
   };
   return (
     <ExpenseContext.Provider
       value={{
         expenses: state.expenses,
-        current: state.current,
+        currentItem: state.currentItem,
         total: state.total,
         addItem,
         deleteItem,
-        updateTotal
+        updateTotal,
+        setCurrntItem,
+        updateExpenses
       }}
     >
       {props.children}

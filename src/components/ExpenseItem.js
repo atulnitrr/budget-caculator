@@ -5,13 +5,12 @@ import ExpenseContext from "../context/expenseContext";
 
 const ExpenseItem = ({ expense }) => {
   const expenseContext = useContext(ExpenseContext);
-  const { deleteItem } = expenseContext;
+  const { deleteItem, setCurrntItem } = expenseContext;
 
   const onDelete = e => {
-    console.log(id);
-
     deleteItem(id);
   };
+
   const { id, amount, charge } = expense;
   return (
     <li className="item">
@@ -20,7 +19,11 @@ const ExpenseItem = ({ expense }) => {
         <span className="amount">${amount}</span>
       </div>
       <div>
-        <button className="edit-btn" aria-label="edit button">
+        <button
+          className="edit-btn"
+          aria-label="edit button"
+          onClick={() => setCurrntItem(id)}
+        >
           <MdEdit />
         </button>
         <button

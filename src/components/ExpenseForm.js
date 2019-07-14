@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
 import { MdSend } from "react-icons/md";
 import ExpenseContext from "../context/expenseContext";
 import uuid from "uuid";
@@ -8,9 +8,14 @@ const ExpenseForm = () => {
     charge: "",
     amount: ""
   });
-
   const expenseContext = useContext(ExpenseContext);
-  const { addItem } = expenseContext;
+  const { addItem, currentItem, updateExpenses } = expenseContext;
+
+  useEffect(() => {
+    if (currentItem) {
+      setExpenseDetails(currentItem[0]);
+    }
+  }, [currentItem]);
 
   const { amount, charge } = expenseDetails;
 
@@ -21,7 +26,13 @@ const ExpenseForm = () => {
     e.preventDefault();
     expenseDetails.id = uuid.v4();
     expenseDetails.amount = parseInt(expenseDetails.amount);
-    addItem(expenseDetails);
+    if (currentItem) {
+      expenseDetails.id = currentItem[0].id;
+      updateExpenses(expenseDetails);
+    } else {
+      addItem(expenseDetails);
+    }
+
     setExpenseDetails({
       charge: "",
       amount: ""
@@ -58,7 +69,7 @@ const ExpenseForm = () => {
           </div>
         </div>
         <button type="submit" className="btn">
-          Submit
+          {currentItem ? "Update Item" : "Add Item"}
           <MdSend className="btn-icon" />
         </button>
       </form>
