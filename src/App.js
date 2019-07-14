@@ -18,7 +18,7 @@ const App = () => {
   return (
     <Fragment>
       <ExpenseState>
-        <Alert />
+        {/* <Alert /> */}
         <h1>budget calculator</h1>
         <main className="App">
           <ExpenseForm getExpense={getExpense} />

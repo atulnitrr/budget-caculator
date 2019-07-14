@@ -3,7 +3,9 @@ import {
   ADD_ITEM,
   UPDATE_TOTAL,
   SET_CURRENT,
-  UPDATE_ITEM
+  UPDATE_ITEM,
+  CLEAR_EXPENSES,
+  CLEAR_CURRENT
 } from "./types";
 
 export default (state, action) => {
@@ -23,7 +25,16 @@ export default (state, action) => {
       return {
         expenses: state.expenses.filter(exp => exp.id !== action.payload)
       };
-
+    case CLEAR_EXPENSES:
+      return {
+        ...state,
+        expenses: []
+      };
+    case CLEAR_CURRENT:
+      return {
+        ...state,
+        currentItem: null
+      };
     case UPDATE_TOTAL:
       return {
         ...state,

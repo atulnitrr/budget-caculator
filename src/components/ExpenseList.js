@@ -5,7 +5,7 @@ import ExpenseContext from "../context/expenseContext";
 
 const ExpenseList = () => {
   const expenseContext = useContext(ExpenseContext);
-  const { expenses } = expenseContext;
+  const { expenses, clearExpense } = expenseContext;
   return (
     <Fragment>
       <ul className="list">
@@ -14,7 +14,7 @@ const ExpenseList = () => {
         })}
       </ul>
       {expenses.length > 0 && (
-        <button className="btn">
+        <button className="btn" onClick={() => clearExpense()}>
           clear expense
           <MdDelete className="btn-icon" />
         </button>

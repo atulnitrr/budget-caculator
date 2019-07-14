@@ -5,3 +5,5 @@ export const ADD_ITEM = "ADD_ITEM";
 export const UPDATE_TOTAL = "UPDATE_TOTAL";
 export const UPDATE_ITEM = "UPDATE_ITEM";
 export const SET_CURRENT = "SET_CURRENT";
+export const CLEAR_EXPENSES = "CLEAR_EXPENSES";
+export const CLEAR_CURRENT = "CLEAR_CURRENT";

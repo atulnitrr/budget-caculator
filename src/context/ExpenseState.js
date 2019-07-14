@@ -7,7 +7,9 @@ import {
   DELETE_ITEM,
   UPDATE_TOTAL,
   SET_CURRENT,
-  UPDATE_ITEM
+  UPDATE_ITEM,
+  CLEAR_EXPENSES,
+  CLEAR_CURRENT
 } from "./types";
 
 const ExpenseState = props => {
@@ -39,6 +41,13 @@ const ExpenseState = props => {
   const setCurrntItem = id => {
     dispatch({ type: SET_CURRENT, payload: id });
   };
+
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
+  const clearExpense = () => {
+    dispatch({ type: CLEAR_EXPENSES });
+  };
   return (
     <ExpenseContext.Provider
       value={{
@@ -49,7 +58,9 @@ const ExpenseState = props => {
         deleteItem,
         updateTotal,
         setCurrntItem,
-        updateExpenses
+        updateExpenses,
+        clearExpense,
+        clearCurrent
       }}
     >
       {props.children}

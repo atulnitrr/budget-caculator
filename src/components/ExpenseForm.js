@@ -9,7 +9,7 @@ const ExpenseForm = () => {
     amount: ""
   });
   const expenseContext = useContext(ExpenseContext);
-  const { addItem, currentItem, updateExpenses } = expenseContext;
+  const { addItem, currentItem, updateExpenses, clearCurrent } = expenseContext;
 
   useEffect(() => {
     if (currentItem) {
@@ -29,6 +29,7 @@ const ExpenseForm = () => {
     if (currentItem) {
       expenseDetails.id = currentItem[0].id;
       updateExpenses(expenseDetails);
+      clearCurrent();
     } else {
       addItem(expenseDetails);
     }
