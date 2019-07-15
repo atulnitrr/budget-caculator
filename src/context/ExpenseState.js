@@ -47,6 +47,7 @@ const ExpenseState = props => {
   };
   const clearExpense = () => {
     dispatch({ type: CLEAR_EXPENSES });
+    updateTotal();
   };
   return (
     <ExpenseContext.Provider
